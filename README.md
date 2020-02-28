@@ -22,6 +22,10 @@
  - To use HTTP POST Requests, initial response shall be sent with HTTP Code 202 Accepted then send the complete request. This approach can also be combined using webhooks.
  - Communication using event-bus completely decouples micro services. In case if the number of un processed message, services can be scalled up to process faster.
  
+ ## Billing and License Management
+ 
+ ## Certificate Management
+ 
  4. Beware of cascading failure across services. Following resilient Communication patterns can be followed.
  - Implement retries with back-off in case of communication failures. Initally attempt to reconnect with less timeouts and gradually increase it.
  - Implement circuit brakers, which allows passing requests from client to server till error count reaches to a level. Later it stops passing requests till a time out /condition and then passes some of the requests to check the status of sever and act accordingly.
