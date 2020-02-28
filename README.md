@@ -12,6 +12,9 @@
 8. Standard middleware/service templates to implement authentication for micro services.
 9. Centralized approach/service templates to store certificates and key store for encrypted/secure communication across micro services
 
+References: Domain Drivrn Design, Refactoring from Anamic Domain model towards a rcih one by Vladimir Korikov
+            Azure Functions Fundamentals, Building Serverless applications in Azure by Mark Heath, 
+
 ## Communication between Micro Services
 
  1. Provide API Gateway to avoid communication from clients to all your micro services. API gateway shall be one point of contact for clients. We shall have multiple API Gateways per front end. Eg: API gate way for mobile front end and another API gateway for web front end.
@@ -21,6 +24,8 @@
  3. for asynchtonous communication, Webhooks for communication over HTTP or event-bus (publish/subscribe) models shall be used.
  - To use HTTP POST Requests, initial response shall be sent with HTTP Code 202 Accepted then send the complete request. This approach can also be combined using webhooks.
  - Communication using event-bus completely decouples micro services. In case if the number of un processed message, services can be scalled up to process faster.
+ 
+ References: Enterprise Integration Patterns- Grogore hohpe
  
  4. Beware of cascading failure across services. Following resilient Communication patterns can be followed.
  - Implement retries with back-off in case of communication failures. Initally attempt to reconnect with less timeouts and gradually increase it.
@@ -60,7 +65,20 @@
   - Detect attacks like phishing, sql injection, http request and react quickly like block access or temporarily shutdown.
   - It should be possible to audit and review who did what and when to check what data is compromised.
   
-   
+ ## Delivering Micro Service
+  1. Automate deployments for freuqent deployments. Setup CI/CD pipeline for build, unit test , deploy to QA and run end-to-end tests. Based on this decision shall be made to push to prodcution. (Dan Wahling Kubernetetes concepts)
+  2. Upgrading one micro service should not require another micro service upgrade.
+    - Blue green swap : Deploy new version and swap the request handling using load balancer. This avoids down time.
+    - Stop current service and switch to new service -> down time
+    - Rolling upgrade: when we have multiple instances/replicas, replace instance one by one. make sure to design in such a way that 2 different versions of instances can run.
+  3. Configure dashborad for aggregated logs eg. similar to Kibana & Elastic Search. Monitor host metrics(CPU & memory) and also number of HTTP requests (401 & 500) to detect misconfigurations or hacked. We shall also check Queue length to see unprocessed requests based on which we can scale apps.
+  4. Micro services shall support health check end points.
+  
+  References: Building Microservices by Sam Newman
  ## Billing and License Management
  
  ## Certificate Management
+
+
+ ## Information Sources
+ https://app.pluralsight.com/library/courses/microservices-fundamentals/table-of-contents Microservices Fundamentals by Mark Heath.
