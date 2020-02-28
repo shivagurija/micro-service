@@ -15,6 +15,37 @@
 References: Domain Drivrn Design, Refactoring from Anamic Domain model towards a rcih one by Vladimir Korikov
             Azure Functions Fundamentals, Building Serverless applications in Azure by Mark Heath, 
 
+## Design Principles
+
+### High Cohesion: Single Responsibility principle.
+
+Micro service should focus on a single item and change for single reason. it shall represent a business function or business model.
+This helps to scale easily. rewrite service etc.
+
+### Autonomus : Loosely coupled
+
+a Micro Services shouldnot require change because on External services or change in other services.
+Micro services shall be stateless. Shall not remember previous user configurations.
+It should be independently changeable and backward compatible when updates.
+
+### Business Domain Centric
+
+Services represent business function.
+
+### Resilience
+
+Availability of other services or connection issues or network issues shall cause this. Our Service should be resilient to handle all scenarios.
+Degrade functionality or provide default functionality in such scenarios. Shall implement retry mechanisms in required scenario.s
+Also health checks.
+- validate inputs/incoming data from other services.
+
+### Observable
+
+centralized Health & logging and monitroing system. This data shall be used for trouble shooting and scaling or for marketing analysis.
+
+### Automation
+ Automation testing tools for quick feedback after integraion for production release.
+ 
 ## Communication between Micro Services
 
  1. Provide API Gateway to avoid communication from clients to all your micro services. API gateway shall be one point of contact for clients. We shall have multiple API Gateways per front end. Eg: API gate way for mobile front end and another API gateway for web front end.
