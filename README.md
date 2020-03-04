@@ -113,3 +113,19 @@ centralized Health & logging and monitroing system. This data shall be used for 
 
  ## Information Sources
  https://app.pluralsight.com/library/courses/microservices-fundamentals/table-of-contents Microservices Fundamentals by Mark Heath.
+ 
+ 
+ ## Load balancing
+ Load balancing helps to distribute the incoming traffic acorss different server to maintain reliability and high availability. It is required depends on different needs of application like huge user access in specific situations. This also helps to scale up or down number of instances running.
+ 
+ ### Load Balancing Mechanisms
+ #### Round-Robin
+   Requests are sent to servers in round-rabin fashion.
+ #### Least Connections
+   Requests are sent to server which has least number of connections. Additional computing is needed to detect which instance has least connections.
+ #### IP Hashing
+   Requests are re-directed based on the client IP Address. Specific client requests are always processed by specific servers.
+   
+ #### Sticky Sessions
+   Based on session ID, requests are sent to same server always.
+   
